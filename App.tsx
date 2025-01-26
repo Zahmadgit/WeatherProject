@@ -5,9 +5,17 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type {PropsWithChildren} from 'react';
+
+import { getWeather } from './src/services/WeatherServices';
+import WeatherList from './src/services/WeatherList';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -15,6 +23,8 @@ import {
   Text,
   useColorScheme,
   View,
+  Image,
+  TextInput
 } from 'react-native';
 
 import {
@@ -24,95 +34,91 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import BottomWeather from './src/screens/BottomWeather';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+
+const BottomTab = createBottomTabNavigator();
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
+    <NavigationContainer>
+      
+      <BottomTab.Navigator
+      
+      screenOptions={{
+        tabBarStyle: [styles.tabBar,
+          {borderTopWidth: 0,
+          
+          }
+        ], // Style for the tab bar
+       
+        headerStyle: styles.headerStyle, // Custom header style
+        headerTintColor: '#fff', // Header text color
+        tabBarIcon : ({focused}) => (
+          <Image source={require('./assets/circle.png')}
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+              height: 15,
+              width: 15,
+              tintColor: focused? 'white':'#574b83',
+              
+          }}></Image>
+      ),
+        //this controls the visibility of the tab bar name 
+        // tabBarLabel: '',
+        tabBarItemStyle: {
+          paddingHorizontal:50
+        }
+        
+      }
+      }
+      
+      >
+        
+        <BottomTab.Screen 
+          name="New York"
+          component={BottomWeather}
+          initialParams={{city: 'new york'}}
+          
+          
+        />  
+        
+
+        <BottomTab.Screen 
+          name="Vehari"
+          component={BottomWeather}
+          initialParams={{city: 'vehari'}}
+          
+        />
+         <BottomTab.Screen 
+          name="Egypt"
+          component={BottomWeather}
+          initialParams={{city: 'egypt'}}
+          
+          
+        />  
+         
+        
+    
+    </BottomTab.Navigator>
+    </NavigationContainer>
   );
 }
 
+
+
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  tabBar: {
+    backgroundColor: '#8f6fb7', // Tab bar background color
+    height: '15%', // Tab bar height
+   
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  headerStyle: {
+    backgroundColor: '#8f6fb7', // Header background color
+    height: 0, // Header height
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+ 
 });
 
 export default App;
