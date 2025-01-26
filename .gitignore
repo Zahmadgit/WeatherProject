@@ -4,6 +4,8 @@
 
 # Xcode
 #
+
+
 build/
 *.pbxuser
 !default.pbxuser
@@ -21,6 +23,8 @@ DerivedData
 *.ipa
 *.xcuserstate
 **/.xcode.env.local
+
+src/res/Strings.js
 
 # Android/IntelliJ
 #
