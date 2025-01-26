@@ -24,7 +24,7 @@ DerivedData
 *.xcuserstate
 **/.xcode.env.local
 
-/src/res/Strings.js
+src/res/Strings.js
 
 # Android/IntelliJ
 #
