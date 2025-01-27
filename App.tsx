@@ -34,91 +34,26 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import BottomWeather from './src/screens/BottomWeather';
 
+import { createStaticNavigation, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import FirstPage from './src/screens/FirstPage';
+import Tabs from './src/screens/Tabs';
 
-
-const BottomTab = createBottomTabNavigator();
 
 function App(): React.JSX.Element {
-
+  const RootStack = createNativeStackNavigator({
+    screens:{
+      FirstPage: FirstPage,
+      Tabs: Tabs,      
+    }
+  })
+  const Navigation = createStaticNavigation(RootStack);
   return (
-    <NavigationContainer>
-      
-      <BottomTab.Navigator
-      
-      screenOptions={{
-        tabBarStyle: [styles.tabBar,
-          {borderTopWidth: 0,
-          
-          }
-        ], // Style for the tab bar
-       
-        headerStyle: styles.headerStyle, // Custom header style
-        headerTintColor: '#fff', // Header text color
-        tabBarIcon : ({focused}) => (
-          <Image source={require('./assets/circle.png')}
-          style={{
-              height: 15,
-              width: 15,
-              tintColor: focused? 'white':'#574b83',
-              
-          }}></Image>
-      ),
-        //this controls the visibility of the tab bar name 
-        // tabBarLabel: '',
-        tabBarItemStyle: {
-          paddingHorizontal:50
-        }
-        
-      }
-      }
-      
-      >
-        
-        <BottomTab.Screen 
-          name="New York"
-          component={BottomWeather}
-          initialParams={{city: 'new york'}}
-          
-          
-        />  
-        
-
-        <BottomTab.Screen 
-          name="Vehari"
-          component={BottomWeather}
-          initialParams={{city: 'vehari'}}
-          
-        />
-         <BottomTab.Screen 
-          name="Egypt"
-          component={BottomWeather}
-          initialParams={{city: 'egypt'}}
-          
-          
-        />  
-         
-        
-    
-    </BottomTab.Navigator>
-    </NavigationContainer>
-  );
-}
-
-
-
-const styles = StyleSheet.create({
-  tabBar: {
-    backgroundColor: '#8f6fb7', // Tab bar background color
-    height: '15%', // Tab bar height
+    <Navigation>
    
-  },
-  headerStyle: {
-    backgroundColor: '#8f6fb7', // Header background color
-    height: 0, // Header height
-  },
- 
-});
+    </Navigation>
+  )
+}
 
 export default App;

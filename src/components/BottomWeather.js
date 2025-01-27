@@ -6,8 +6,8 @@ import { SafeAreaView, StyleSheet, Text, View, Switch } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient'
 
-const BottomWeather = ({ route }) => {
-  const { city} = route.params;
+const BottomWeather = ({ city }) => {
+  
 
   const [viewMode, setViewMode] = useState('daily');
   const [weatherData, setWeatherData] = useState([]);
@@ -33,10 +33,10 @@ const BottomWeather = ({ route }) => {
 
   return (
     
-    <SafeAreaView style={{marginVertical:'120%'}}>
+    <SafeAreaView style={{}}>
     
       <View style={
-        {marginBottom:'-80%',
+        {marginBottom:'90%',
             
         }
       }>
@@ -56,7 +56,7 @@ const BottomWeather = ({ route }) => {
                 { color: !isSwitchOn ? 'white' : 'purple', fontWeight: !isSwitchOn ? 'bold' : 'normal' },
               ]}
             >
-              Daily
+              DAY
             </Text>
 
             {/* "Weekly" Label */}
@@ -66,7 +66,7 @@ const BottomWeather = ({ route }) => {
                 { color: isSwitchOn ? 'white' : 'purple', fontWeight: isSwitchOn ? 'bold' : 'normal' },
               ]}
             >
-              Weekly
+              WEEK
             </Text>
           </View>
 

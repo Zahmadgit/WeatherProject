@@ -1,7 +1,7 @@
 // src/components/WeatherList.js
 import React from 'react';
 import { View, Text, Image, StyleSheet, FlatList } from 'react-native';
-
+import LinearGradient from 'react-native-linear-gradient';
 
 const groupByDate = (weatherData) => {
     const groupedData = [];
@@ -27,7 +27,7 @@ const groupByDate = (weatherData) => {
 
   const getTime = (timestamp) => {
     const date = new Date(timestamp * 1000);
-    return date.toLocaleTimeString([], { hour: '2-digit' }); // HH:MM format
+    return date.toLocaleTimeString([], { hour: '2-digit' });
   };
 
 
@@ -72,7 +72,7 @@ const WeatherList = ({ weatherData, viewMode }) => {
       horizontal={true} // Enable horizontal scrolling
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.list}
-    />
+    />  
   );
 };
 
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 10,
     marginVertical:100,
-    
     marginTop: '20%',
     padding: 10,
     borderRadius: 35,
