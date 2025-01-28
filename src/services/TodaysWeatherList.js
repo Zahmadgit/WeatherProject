@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useCity } from '../context/CityContext'; // Import the custom hook
 
-const TodaysWeatherList = ({ weatherData, city}) => {
+const TodaysWeatherList = ({ weatherData, city: propCity}) => {
+  const { city: contextCity } = useCity();
+  
+    // Use prop city if provided, otherwise fall back to context city
+  const city = propCity || contextCity;
   if (!weatherData || weatherData.length === 0) {
     return null; // Handle empty or invalid weatherData
   }

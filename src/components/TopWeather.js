@@ -6,8 +6,13 @@ import { SafeAreaView, StyleSheet, Text, View, Switch, ImageBackground } from 'r
 import { moderateScale } from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient'
 import TodaysWeatherList from '../services/TodaysWeatherList';
+import { useCity } from '../context/CityContext'; // Import the custom hook
 
-const TopWeather = ({ city }) => {
+const TopWeather = ({ city: propCity }) => {
+    const { city: contextCity } = useCity();
+  
+    // Use prop city if provided, otherwise fall back to context city
+    const city = propCity || contextCity;
   
   const [weatherData, setWeatherData] = useState([]);
   const [weatherCondition, setWeatherCondition] = useState('');

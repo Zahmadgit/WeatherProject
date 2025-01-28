@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, FlatList } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
+
 const groupByDate = (weatherData) => {
     const groupedData = [];
     let currentDate = '';

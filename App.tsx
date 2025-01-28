@@ -39,6 +39,8 @@ import { createStaticNavigation, useNavigation } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FirstPage from './src/screens/FirstPage';
 import Tabs from './src/screens/Tabs';
+import { CityProvider } from './src/context/CityContext';
+
 
 
 function App(): React.JSX.Element {
@@ -50,9 +52,11 @@ function App(): React.JSX.Element {
   })
   const Navigation = createStaticNavigation(RootStack);
   return (
+    <CityProvider>
     <Navigation>
    
     </Navigation>
+    </CityProvider>
   )
 }
 
