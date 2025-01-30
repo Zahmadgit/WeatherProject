@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, TextInput, Button, View } from 'react-native';
 import { useCityInput } from '../hooks/useCityInput';
 
-const FirstPage = () => {
+const FirstPage: React.FC  = () => {
   const { text, setText, onSignUpPressed } = useCityInput();
 
   return (
