@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, TextInput, Button, View } from 'react-native';
-import { useCity } from '../context/CityContext';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import {StyleSheet, TextInput, Button, View } from 'react-native';
+import { useCityInput } from '../hooks/useCityInput';
 
 const FirstPage = () => {
-  const [text, setText] = useState('');
-  const { setCity } = useCity(); // Access the setCity function from context
-  const navigation = useNavigation();
-
-  const onSignUpPressed = () => {
-    setCity(text); // Set the city in the context
-    navigation.navigate('Tabs'); // Navigate to the Tabs screen
-  };
+  const { text, setText, onSignUpPressed } = useCityInput();
 
   return (
     <View style={{...styles.textInput}}>
