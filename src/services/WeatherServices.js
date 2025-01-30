@@ -1,27 +1,39 @@
-import axios from 'axios';
 import { WEATHER_API_KEY } from '../res/Strings';
-
 
 export const getWeather = async (city) => {
   try {
-    let res = await axios.get (
+    const response = await fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${WEATHER_API_KEY}&units=imperial`
     );
 
-    return {success: true, data: res.data};
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    } 
+
+    // Parse the JSON data from the response
+    const data = await response.json();
+
+    return { success: true, data };
   } catch (e) {
-    return {success: false, data: null};
+    return { success: false, data: null };
   }
 };
 
-export const getWeatherByCity = async city => {
+export const getWeatherByCity = async (city) => {
   try {
-    let res = await axios.get (
+    const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric`
     );
 
-    return {success: true, data: res.data};
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Parse the JSON data from the response
+    const data = await response.json();
+
+    return { success: true, data };
   } catch (e) {
-    return {success: false, data: null};
+    return { success: false, data: null };
   }
 };
